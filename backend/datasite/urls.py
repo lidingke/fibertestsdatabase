@@ -17,9 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 import xadmin
+
+from apps.producer.views import ResultListViewSet
+
 router = DefaultRouter()
 # router.register(r'goods', GoodsListViewSet, base_name="goods")
-
+router.register(r'producer', ResultListViewSet, base_name="producer")
 
 urlpatterns = [
     # url(r'^producer/', include('polls.urls')),

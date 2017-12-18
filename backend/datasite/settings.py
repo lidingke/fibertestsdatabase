@@ -32,9 +32,9 @@ SECRET_KEY = 'q@c&l9^94&1nn3t^watk7=^of(%_3*+uy2s8q=7+2=-pv^+07j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['112.74.47.56',]
 AUTH_USER_MODEL = 'users.UserProfile'
-
+# from apps.producer
 
 # Application definition
 
@@ -45,15 +45,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
+    'django.contrib.sites',
     'users.apps.UsersConfig',
-    'xadmin',
     'DjangoUeditor',
+    'producer.apps.ProducerConfig',
+
     'crispy_forms',
-    'producer.apps.ProducerConfig'
+
+    'rest_framework',
+    'xadmin',
+    'django_filters',
+    'rest_framework.authtoken',
+
 
 ]
+# SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,9 +100,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "datasite",
         'USER': 'root',
-        'PASSWORD': "KK123456",
+        'PASSWORD': "kk123456",
         'HOST': "127.0.0.1",
-        'OPTIONS': { 'init_command': 'SET default_storage_engine=INNODB;' }
+        'OPTIONS': { 'init_command': 'SET default_storage_engine=INNODB,'
+                                     'character_set_connection=utf8,collation_connection=utf8_unicode_ci;' }
     }
 }
 

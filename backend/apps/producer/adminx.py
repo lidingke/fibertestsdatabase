@@ -13,7 +13,7 @@
 """
 import xadmin
 from xadmin import views
-from .models import Result, Instrument
+from producer.models import Result, Instrument
 
 
 class ResultSetting(object):
@@ -28,7 +28,8 @@ class ResultSetting(object):
 
 
 class InstrumentSetting(object):
-    pass
+    list_display = ["serialsnumber","instrumenttype"]
+    ordering = ['-id']
 
 
 

@@ -26,8 +26,8 @@ class GlobalSettings(object):
     # menu_style = "accordion"
 
 
-class VerifyCodeAdmin(object):
-    list_display = ['code', 'mobile', "add_time"]
+# class VerifyCodeAdmin(object):
+#     list_display = ['code', 'mobile', "add_time"]
 
 
 xadmin.site.register(views.BaseAdminView, BaseSetting)

@@ -38,8 +38,9 @@ class Result(models.Model):
 
     # worker = Column(String(50), nullable=False)
 
-    owner = models.ForeignKey(User, related_name='result', on_delete=models.CASCADE, verbose_name="测试人员")
-    instrument = models.ForeignKey(Instrument, verbose_name="测试设备")
+    owner = models.ForeignKey(User, related_name='result_owner', on_delete=models.CASCADE, verbose_name="测试人员")
+    instrument = models.ForeignKey(Instrument,related_name='result_instrument',
+                                   on_delete=models.CASCADE, verbose_name="测试设备")
 
     class Meta:
         verbose_name = '测试结果'
