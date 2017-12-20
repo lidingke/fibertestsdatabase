@@ -15,6 +15,8 @@ import xadmin
 from xadmin import views
 from producer.models import Result, Instrument
 
+from producer.models import ResultColumns
+
 
 class ResultSetting(object):
     # enable_themes = True
@@ -42,6 +44,11 @@ class InstrumentSetting(object):
 # class VerifyCodeAdmin(object):
 #     list_display = ['code', 'mobile', "add_time"]
 # class ResultAdmin(object):
+
+class ViewColumnSetting(object):
+    list_display = ['name','key']
+
+xadmin.site.register(ResultColumns, ViewColumnSetting)
 
 xadmin.site.register(Result, ResultSetting)
 xadmin.site.register(Instrument, InstrumentSetting)

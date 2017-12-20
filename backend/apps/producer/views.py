@@ -6,9 +6,10 @@ from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from producer.serializers import ResultSerializer
-from producer.models import Result
-
+from producer.serializers import ResultSerializer,ResultColumnsSerializer
+from producer.models import Result,ResultColumns
+#
+# from apps.producer.models import
 
 
 class ResultPagination(PageNumberPagination):
@@ -47,3 +48,11 @@ class ResultListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     #     instance.save()
     #     serializer = self.get_serializer(instance)
     #     return Response(serializer.data)
+
+class ResultColumnsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+
+    queryset = ResultColumns.objects.all()
+    serializer_class = ResultColumnsSerializer
+
+
+

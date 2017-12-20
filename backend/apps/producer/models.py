@@ -48,3 +48,16 @@ class Result(models.Model):
 
     def __str__(self):
         return "{}:{}:{}".format(self.id,self.instrument,self.owner)
+
+
+class ResultColumns(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True)
+    name = models.CharField(max_length=100, verbose_name="name")
+    key = models.CharField(max_length=100, verbose_name="key")
+
+    class Meta:
+        verbose_name = '需要显示的列表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name

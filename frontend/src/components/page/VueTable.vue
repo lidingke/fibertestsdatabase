@@ -21,90 +21,95 @@
                 </el-form-item>
             </el-form>
         </div>
-        <datasource language="en" :table-data="getData" :columns="columns" :pagination="information.pagination"
+        <datasource language="en" :table-data="information.data" :columns="information.columns" :pagination="information.pagination"
                 :actions="actions"
                 v-on:change="changePage"
-                v-on:searching="onSearch"></datasource>
+                v-on:searching="onSearch">
+                </datasource>
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
-    import Datasource from 'vue-datasource';
-    export default {
-        data: function(){
-            const self = this;
-            return {
-                url: './static/datasource.json',
-                information: {
-                    pagination:{},
-                    data:[]
-                },
-                columns: [
-                    {
-                        name: 'Id',
-                        key: 'id',
-                    },
-                    {
-                        name: 'Name',
-                        key: 'name',
-                    },
-                    {
-                        name: 'email',
-                        key: 'email',
-                    },
-                    {
-                        name: 'ip',
-                        key: 'ip',
-                    }
-                ],
-                form: {
-                    name: '',
-                    region: ''
-                },
-                actions: [
-                    {
-                        text: 'Click',
-                        class: 'btn-primary',
-                        event(e, row) {
-                            self.$message('选中的行数： ' + row.row.id);
-                        }
-                    }
-                ],
-                query:''
-            }
+import { getinit,getcolumn } from "../../api/api";
+import axios from "axios";
+import Datasource from "vue-datasource";
+export default {
+  data: function() {
+    const self = this;
+    return {
+      // url: "./static/datasource.json",
+      // url: "http://127.0.0.1:8080/producer",
+      information: {
+        pagination: {},
+        data: [
+          {id:'0',owner:'1'}
+        ],
+        columns:
+        [
+        {
+          name: "Id",
+          key: "id"
         },
-        components: {
-            Datasource
-        },
-        methods: {
-            changePage(values) {
-                this.information.pagination.per_page = values.perpage;
-                this.information.data = this.information.data;
-            },
-            onSearch(searchQuery) {
-                this.query = searchQuery;
-            }
-        },
-        computed:{
-            getData(){
-                const self = this;
-                return self.information.data.filter(function (d) {
-                    if(d.name.indexOf(self.query) > -1){
-                        return d;
-                    }
-                })
-            }
-        },
-        beforeMount(){
-            if(process.env.NODE_ENV === 'development'){
-                this.url = '/ms/table/source';
-            };
-            axios.get(this.url).then( (res) => {
-                this.information = res.data;
-            })
+        {
+          name: "Owner",
+          key: "owner"
+        },]
+      },
+      form: {
+        name: "",
+        region: ""
+      },
+      actions: [
+        {
+          text: "Click",
+          class: "btn-primary",
+          event(e, row) {
+            self.$message("选中的行数： " + row.row.id);
+          }
         }
-    }
+      ],
+      query: ""
+    };
+  },
+  components: {
+    Datasource
+  },
+  methods: {
+    changePage(values) {
+      this.information.pagination.per_page = values.perpage;
+      this.information.data = this.information.data;
+    },
+    onSearch(searchQuery) {
+      this.query = searchQuery;
+    },
+    getResultByAxio() {
+      getinit({
+        params: {
+          format: "json"
+        }
+      }).then(response => {
+        this.information.data = response.data.results;
+        console.log("this.information.data:",this.information);
+      });
+    },
+    getColumnsByAxio() {
+      getcolumn({
+        params: {
+          format: "json"
+        }
+      }).then(response => {
+        console.log("in get columns");
+        console.log("RESPONSE columns:",response);
+        this.information.columns = response.data;
+        console.log("this.information.columns:",this.information);
+      });
+    },
+  },
+  created() {
+    this.getColumnsByAxio();    
+    this.getResultByAxio();
+  }
+};
 </script>
 
 <style src="../../../static/css/datasource.css"></style>

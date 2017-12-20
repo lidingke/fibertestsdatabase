@@ -18,11 +18,12 @@ from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 import xadmin
 
-from apps.producer.views import ResultListViewSet
+from apps.producer.views import ResultListViewSet,ResultColumnsListViewSet
 
 router = DefaultRouter()
 # router.register(r'goods', GoodsListViewSet, base_name="goods")
 router.register(r'producer', ResultListViewSet, base_name="producer")
+router.register(r'producercolumns', ResultColumnsListViewSet, base_name="producercolumns")
 
 urlpatterns = [
     # url(r'^producer/', include('polls.urls')),

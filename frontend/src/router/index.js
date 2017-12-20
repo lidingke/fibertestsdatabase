@@ -3,7 +3,8 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-export default new Router({
+
+var router = new Router({
     routes: [
         {
             path: '/',
@@ -57,3 +58,5 @@ export default new Router({
         },
     ]
 })
+
+export default router;

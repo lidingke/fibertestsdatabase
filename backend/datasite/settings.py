@@ -32,7 +32,7 @@ SECRET_KEY = 'q@c&l9^94&1nn3t^watk7=^of(%_3*+uy2s8q=7+2=-pv^+07j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['112.74.47.56',]
+ALLOWED_HOSTS = ['112.74.47.56', '127.0.0.1','localhost']
 AUTH_USER_MODEL = 'users.UserProfile'
 # from apps.producer
 
@@ -45,10 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'users.apps.UsersConfig',
     'DjangoUeditor',
     'producer.apps.ProducerConfig',
+    'corsheaders',
 
     'crispy_forms',
 
@@ -57,11 +58,12 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
 
-
 ]
 # SITE_ID = 1
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,8 +71,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
+]
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'datasite.urls'
 
 TEMPLATES = [
@@ -91,7 +94,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'datasite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -102,11 +104,10 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': "kk123456",
         'HOST': "127.0.0.1",
-        'OPTIONS': { 'init_command': 'SET default_storage_engine=INNODB,'
-                                     'character_set_connection=utf8,collation_connection=utf8_unicode_ci;' }
+        'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB,'
+                                    'character_set_connection=utf8,collation_connection=utf8_unicode_ci;'}
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -126,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
@@ -140,13 +140,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-#设置时区
-LANGUAGE_CODE = 'zh-hans'  #中文支持，django1.8以后支持；1.8以前是zh-cn
+# 设置时区
+LANGUAGE_CODE = 'zh-hans'  # 中文支持，django1.8以后支持；1.8以前是zh-cn
 TIME_ZONE = 'Asia/Shanghai'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False   #默认是Ture，时间是utc时间，由于我们要用本地时间，所用手动修改为false！！！！
-
+USE_TZ = False  # 默认是Ture，时间是utc时间，由于我们要用本地时间，所用手动修改为false！！！！
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
