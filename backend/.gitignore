@@ -10,8 +10,7 @@ __pycache__/
 
 # my ignore
 .idea/
-extra_apps
-migrateions/
+extra_apps/
 
 # Distribution / packaging
 .Python
@@ -99,9 +98,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
-
-apps/producer/migrations/0003_auto_20171215_1047.py
-apps/producer/migrations/0004_auto_20171215_1051.py
-apps/producer/migrations/0005_auto_20171215_1103.py
-apps/producer/serializers.py
+migrations/
 media/
+
