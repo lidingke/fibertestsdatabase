@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
-import xadmin
+# import xadmin
+# from django.contrib import admin
 
 from apps.producer.views import ResultListViewSet,ResultColumnsListViewSet
 
@@ -28,6 +29,7 @@ router.register(r'producercolumns', ResultColumnsListViewSet, base_name="produce
 urlpatterns = [
     # url(r'^producer/', include('polls.urls')),
     url(r'^', include(router.urls)),
-    url(r'^xadmin/', xadmin.site.urls),
+    # url(r'^xadmin/', xadmin.site.urls),
+    url(r'^admin/',admin.site.urls)
 
 ]
