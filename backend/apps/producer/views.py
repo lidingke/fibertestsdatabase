@@ -1,3 +1,5 @@
+import pdb
+
 from django.shortcuts import render
 from rest_framework import filters
 from rest_framework import mixins
@@ -41,6 +43,15 @@ class ResultListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     # filter_class = ResultFilter
     search_fields = ('owner', 'instrument')
     ordering_fields = ('id',)
+
+    def list(self, request, *args, **kwargs):
+        response = super(ResultListViewSet, self).list(request, *args, **kwargs)
+        if isinstance(response.data, dict):
+            columns = []
+            for i in ResultColumns.objects.all():
+                columns.append({'name':str(i).upper(),'key':str(i)})
+            response.data['columns'] = columns
+        return response
 
     # def retrieve(self, request, *args, **kwargs):
     #     instance = self.get_object()

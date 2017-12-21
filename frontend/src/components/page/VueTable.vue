@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getinit,getcolumn } from "../../api/api";
+import { getinit, getcolumn } from "../../api/api";
 import axios from "axios";
 import Datasource from "vue-datasource";
 export default {
@@ -38,22 +38,19 @@ export default {
     const self = this;
     return {
       // url: "./static/datasource.json",
-      // url: "http://127.0.0.1:8080/producer",
       information: {
         pagination: {},
-        data: [
-          {id:'0',owner:'1'}
-        ],
-        columns:
-        [
-        {
-          name: "Id",
-          key: "id"
-        },
-        {
-          name: "Owner",
-          key: "owner"
-        },]
+        data: [{ id: "0", owner: "1" }],
+        columns: [
+          {
+            name: "Id",
+            key: "id"
+          },
+          {
+            name: "Owner",
+            key: "owner"
+          }
+        ]
       },
       form: {
         name: "",
@@ -88,25 +85,28 @@ export default {
           format: "json"
         }
       }).then(response => {
+        console.log("response:", response.data);
+        
+        this.information.columns = response.data.columns;        
         this.information.data = response.data.results;
-        console.log("this.information.data:",this.information);
+        console.log("this.information.data:", this.information);
       });
     },
-    getColumnsByAxio() {
-      getcolumn({
-        params: {
-          format: "json"
-        }
-      }).then(response => {
-        console.log("in get columns");
-        console.log("RESPONSE columns:",response);
-        this.information.columns = response.data;
-        console.log("this.information.columns:",this.information);
-      });
-    },
+    // getColumnsByAxio() {
+    //   getcolumn({
+    //     params: {
+    //       format: "json"
+    //     }
+    //   }).then(response => {
+    //     console.log("in get columns");
+    //     console.log("RESPONSE columns:", response);
+    //     this.information.columns = response.data;
+    //     console.log("this.information.columns:", this.information);
+    //   });
+    // }
   },
   created() {
-    this.getColumnsByAxio();    
+    // this.getColumnsByAxio();
     this.getResultByAxio();
   }
 };

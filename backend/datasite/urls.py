@@ -24,7 +24,7 @@ from apps.producer.views import ResultListViewSet,ResultColumnsListViewSet
 router = DefaultRouter()
 # router.register(r'goods', GoodsListViewSet, base_name="goods")
 router.register(r'producer', ResultListViewSet, base_name="producer")
-router.register(r'producercolumns', ResultColumnsListViewSet, base_name="producercolumns")
+# router.register(r'producercolumns', ResultColumnsListViewSet, base_name="producercolumns")
 
 urlpatterns = [
     # url(r'^producer/', include('polls.urls')),

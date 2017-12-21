@@ -6,12 +6,20 @@ from producer.models import Result,ResultColumns
 
 class ResultSerializer(serializers.ModelSerializer):
 
+
+    owner = serializers.SerializerMethodField()
+
     class Meta:
         model = Result
         fields = (
-            'owner', 'corediameter', 'claddiameter',
+            'owner','corediameter', 'claddiameter',
             'coreroundness', 'cladroundness', 'concentricity', 'add_time'
         )
+
+
+    def get_owner(self,obj):
+        name = "%s" % obj.owner
+        return name.upper()
 
 
 class ResultColumnsSerializer(serializers.ModelSerializer):
