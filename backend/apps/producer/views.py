@@ -49,7 +49,7 @@ class ResultListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         if isinstance(response.data, dict):
             columns = []
             for i in ResultColumns.objects.all():
-                columns.append({'name':str(i).upper(),'key':str(i)})
+                columns.append({'name':i.name,'key':i.key})
             response.data['columns'] = columns
         return response
 
