@@ -18,8 +18,9 @@ from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 # import xadmin
 # from django.contrib import admin
+from rest_framework_jwt.views import obtain_jwt_token
 
-from apps.producer.views import ResultListViewSet,ResultColumnsListViewSet
+from apps.producer.views import ResultListViewSet, ResultColumnsListViewSet
 
 router = DefaultRouter()
 # router.register(r'goods', GoodsListViewSet, base_name="goods")
@@ -30,6 +31,7 @@ urlpatterns = [
     # url(r'^producer/', include('polls.urls')),
     url(r'^', include(router.urls)),
     # url(r'^xadmin/', xadmin.site.urls),
-    url(r'^admin/',admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+    url(r'^login/', obtain_jwt_token)
 
 ]

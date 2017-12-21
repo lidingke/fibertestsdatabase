@@ -86,27 +86,13 @@ export default {
         }
       }).then(response => {
         console.log("response:", response.data);
-        
         this.information.columns = response.data.columns;        
         this.information.data = response.data.results;
         console.log("this.information.data:", this.information);
       });
-    },
-    // getColumnsByAxio() {
-    //   getcolumn({
-    //     params: {
-    //       format: "json"
-    //     }
-    //   }).then(response => {
-    //     console.log("in get columns");
-    //     console.log("RESPONSE columns:", response);
-    //     this.information.columns = response.data;
-    //     console.log("this.information.columns:", this.information);
-    //   });
-    // }
+    }
   },
   created() {
-    // this.getColumnsByAxio();
     this.getResultByAxio();
   }
 };
